@@ -677,7 +677,7 @@ impl<'js> Ctx<'js> {
         F: FnOnce() -> qjs::JSValue + UnwindSafe,
     {
         unsafe {
-            match panic::catch_unwind(f) {
+            match std::panic::catch_unwind(f) {
                 Ok(x) => x,
                 Err(e) => {
                     (*self.get_opaque()).panic = Some(e);
@@ -698,7 +698,7 @@ impl<'js> Ctx<'js> {
         } else {
             #[cfg(feature = "std")]
             if let Some(x) = (*self.get_opaque()).panic.take() {
-                panic::resume_unwind(x)
+                std::panic::resume_unwind(x)
             }
             Err(Error::Exception)
         }
@@ -711,7 +711,7 @@ impl<'js> Ctx<'js> {
         unsafe {
             #[cfg(feature = "std")]
             if let Some(x) = (*self.get_opaque()).panic.take() {
-                panic::resume_unwind(x)
+                std::panic::resume_unwind(x)
             }
             Error::Exception
         }

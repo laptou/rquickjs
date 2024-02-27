@@ -221,7 +221,7 @@ trace_impls! {
     alloc::collections::VecDeque,
     alloc::collections::LinkedList,
     #[cfg(feature = "std")]
-    core::collections::HashSet {S},
+    std::collections::HashSet {S},
     alloc::collections::BTreeSet,
     #[cfg(feature = "indexmap")]
     #[cfg_attr(feature = "doc-cfg", doc(cfg(all(feature = "classes", feature = "indexmap"))))]
@@ -231,7 +231,7 @@ trace_impls! {
 trace_impls! {
     map:
     #[cfg(feature = "std")]
-    alloc::collections::HashMap {S},
+    std::collections::HashMap {S},
     alloc::collections::BTreeMap,
     #[cfg(feature = "indexmap")]
     #[cfg_attr(feature = "doc-cfg", doc(cfg(all(feature = "classes", feature = "indexmap"))))]

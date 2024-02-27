@@ -231,7 +231,7 @@ impl RawRuntime {
             _rt: *mut qjs::JSRuntime,
             opaque: *mut ::core::ffi::c_void,
         ) -> ::core::ffi::c_int {
-            let catch_unwind = panic::catch_unwind(move || {
+            let catch_unwind = std::panic::catch_unwind(move || {
                 let opaque = &mut *(opaque as *mut Opaque);
                 opaque.interrupt_handler.as_mut().expect("handler is set")()
             });

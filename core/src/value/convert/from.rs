@@ -18,7 +18,7 @@ use core::{
 #[cfg(feature = "std")]
 use std::{
     collections::{HashMap, HashSet},
-    sync::{Arc, Mutex, RwLock},
+    sync::{Mutex, RwLock},
     time::SystemTime,
 };
 
@@ -277,6 +277,7 @@ from_js_impls! {
 
 #[cfg(feature = "std")]
 from_js_impls! {
+    ref:
     Mutex,
     RwLock,
 }
