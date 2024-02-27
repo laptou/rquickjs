@@ -1,4 +1,6 @@
-use std::{future::Future, mem, pin::Pin, ptr::NonNull};
+use core::{future::Future, mem, pin::Pin, ptr::NonNull};
+
+use alloc::boxed::Box;
 
 use crate::{markers::ParallelSend, qjs, runtime::AsyncRuntime, Ctx, Error, Result};
 
@@ -13,7 +15,7 @@ mod future;
 /// # Usage
 /// ```
 /// # use rquickjs::{prelude::*, Function, async_with, AsyncRuntime, AsyncContext, Result};
-/// # use std::time::Duration;
+/// # use core::time::Duration;
 /// # async fn run(){
 /// let rt = AsyncRuntime::new().unwrap();
 /// let ctx = AsyncContext::full(&rt).await.unwrap();
@@ -78,8 +80,8 @@ macro_rules! async_with{
             /// rquickjs objects are send so the future will never be send.
             /// Since we acquire a lock before running the future and nothing can escape the closure
             /// and future it is safe to recast the future as send.
-            unsafe fn uplift<'a,'b,R>(f: std::pin::Pin<Box<dyn std::future::Future<Output = R> + 'a>>) -> std::pin::Pin<Box<dyn std::future::Future<Output = R> + 'b + Send>>{
-                std::mem::transmute(f)
+            unsafe fn uplift<'a,'b,R>(f: core::pin::Pin<Box<dyn core::future::Future<Output = R> + 'a>>) -> core::pin::Pin<Box<dyn core::future::Future<Output = R> + 'b + Send>>{
+                core::mem::transmute(f)
             }
             unsafe{ uplift(fut) }
         })
@@ -116,6 +118,7 @@ impl Drop for Inner {
                         // We should still free the context.
                         // TODO see if there is a way to recover from a panic which could cause the
                         // following assertion to trigger
+                        #[cfg(feature = "std")]
                         assert!(std::thread::panicking());
                     }
                     unsafe { qjs::JS_FreeContext(self.ctx.as_ptr()) }
@@ -269,7 +272,7 @@ mod test {
     #[cfg(feature = "parallel")]
     #[tokio::test]
     async fn parallel_drop() {
-        use std::{
+        use core::{
             sync::{Arc, Barrier},
             thread,
         };
@@ -286,7 +289,7 @@ mod test {
             println!("wait_for entry ctx_1");
             wait_for_entry_c.wait();
             println!("dropping");
-            std::mem::drop(ctx_1);
+            core::mem::drop(ctx_1);
             println!("wait_for exit ctx_1");
             wait_for_exit_c.wait();
         });

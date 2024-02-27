@@ -1,8 +1,16 @@
+use alloc::string::String;
+
 use crate::{
     module::{ModuleData, ModuleDef},
     Ctx, Error, Result,
 };
-use std::{collections::HashMap, fmt::Debug};
+use core::fmt::Debug;
+
+#[cfg(feature = "std")]
+use std::collections::HashMap as Map;
+
+#[cfg(not(feature = "std"))]
+use alloc::collections::BTreeMap as Map;
 
 use super::Loader;
 
@@ -11,7 +19,7 @@ use super::Loader;
 /// This loader can be used as the nested backing loader in user-defined loaders.
 #[derive(Debug, Default)]
 pub struct ModuleLoader {
-    modules: HashMap<String, ModuleData>,
+    modules: Map<String, ModuleData>,
 }
 
 impl ModuleLoader {

@@ -1,10 +1,12 @@
 //! Loaders and resolvers for loading JS modules.
 
-use std::{ffi::CStr, ptr};
+use core::{ffi::CStr, ptr};
+use alloc::vec::Vec;
 
 use crate::{module::ModuleData, qjs, Ctx, Module, Result};
 
 mod builtin_resolver;
+use alloc::{boxed::Box, string::String};
 pub use builtin_resolver::BuiltinResolver;
 
 mod file_resolver;
@@ -218,7 +220,7 @@ macro_rules! loader_impls {
                 #[allow(non_snake_case)]
                 #[allow(unused_mut)]
                 fn resolve<'js>(&mut self, _ctx: &Ctx<'js>, base: &str, name: &str) -> Result<String> {
-                    let mut messages = Vec::<std::string::String>::new();
+                    let mut messages = Vec::<alloc::string::String>::new();
                     let ($($t,)*) = self;
                     $(
                         match $t.resolve(_ctx, base, name) {
@@ -245,7 +247,7 @@ macro_rules! loader_impls {
                 #[allow(non_snake_case)]
                 #[allow(unused_mut)]
                 unsafe fn raw_load<'js>(&mut self, _ctx: &Ctx<'js>, name: &str) -> Result<Module<'js>> {
-                    let mut messages = Vec::<std::string::String>::new();
+                    let mut messages = Vec::<alloc::string::String>::new();
                     let ($($t,)*) = self;
                     $(
                         match $t.raw_load(_ctx, name) {

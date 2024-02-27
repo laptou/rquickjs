@@ -1,12 +1,18 @@
-use std::{
-    error::Error as StdError,
-    ffi::{CString, FromBytesWithNulError, NulError},
+use alloc::{
+    ffi::{CString, NulError},
+    string::{FromUtf8Error, ToString},
+};
+use core::{
     fmt::{self, Display, Formatter, Result as FmtResult},
-    io::Error as IoError,
     panic,
     panic::UnwindSafe,
     str::{FromStr, Utf8Error},
-    string::FromUtf8Error,
+    ffi::FromBytesWithNulError,
+};
+#[cfg(feature = "std")]
+use std::{
+    error::Error as StdError,
+    io::Error as IoError,
 };
 
 #[cfg(feature = "futures")]
@@ -52,6 +58,7 @@ impl fmt::Display for BorrowError {
     }
 }
 
+#[cfg(feature = "std")]
 impl std::error::Error for BorrowError {}
 
 /// Error type of the library.
@@ -72,6 +79,7 @@ pub enum Error {
     /// String from rquickjs was not UTF-8
     Utf8(Utf8Error),
     /// An io error
+    #[cfg(feature = "std")]
     Io(IoError),
     /// An error happened while trying to borrow a Rust class object.
     ClassBorrow(BorrowError),
@@ -345,6 +353,7 @@ impl Error {
     }
 }
 
+#[cfg(feature = "std")]
 impl StdError for Error {}
 
 impl Display for Error {
@@ -441,6 +450,7 @@ impl Display for Error {
                     }
                 }
             }
+            #[cfg(feature = "std")]
             Io(error) => {
                 "IO Error: ".fmt(f)?;
                 error.fmt(f)?;
@@ -480,6 +490,10 @@ from_impls! {
     NulError => InvalidString,
     FromBytesWithNulError => InvalidCStr,
     Utf8Error => Utf8,
+}
+
+#[cfg(feature = "std")]
+from_impls! {
     IoError => Io,
 }
 
@@ -519,6 +533,7 @@ impl<'js> Display for CaughtError<'js> {
     }
 }
 
+#[cfg(feature = "std")]
 impl<'js> StdError for CaughtError<'js> {}
 
 impl<'js> CaughtError<'js> {
@@ -656,6 +671,7 @@ impl Display for AsyncJobException {
 }
 
 impl<'js> Ctx<'js> {
+    #[cfg(feature = "std")]
     pub(crate) fn handle_panic<F>(&self, f: F) -> qjs::JSValue
     where
         F: FnOnce() -> qjs::JSValue + UnwindSafe,
@@ -680,6 +696,7 @@ impl<'js> Ctx<'js> {
         if qjs::JS_VALUE_GET_NORM_TAG(js_val) != qjs::JS_TAG_EXCEPTION {
             Ok(js_val)
         } else {
+            #[cfg(feature = "std")]
             if let Some(x) = (*self.get_opaque()).panic.take() {
                 panic::resume_unwind(x)
             }
@@ -692,6 +709,7 @@ impl<'js> Ctx<'js> {
     pub(crate) fn raise_exception(&self) -> Error {
         // Safety
         unsafe {
+            #[cfg(feature = "std")]
             if let Some(x) = (*self.get_opaque()).panic.take() {
                 panic::resume_unwind(x)
             }

@@ -1,3 +1,5 @@
+use alloc::{string::String, vec::Vec};
+
 use crate::{
     loader::{util::check_extensions, Loader},
     module::ModuleData,
@@ -35,6 +37,7 @@ impl Default for ScriptLoader {
     }
 }
 
+#[cfg(feature = "std")]
 impl Loader for ScriptLoader {
     fn load<'js>(&mut self, _ctx: &Ctx<'js>, path: &str) -> Result<ModuleData> {
         if !check_extensions(path, &self.extensions) {

@@ -1,8 +1,10 @@
 //! Utilities for embedding JS modules.
 
+use alloc::string::String;
+
 use super::{util::resolve_simple, Loader, Resolver};
 use crate::{module::ModuleData, Ctx, Error, Result};
-use std::ops::Deref;
+use core::ops::Deref;
 
 /// The module data which contains bytecode
 ///

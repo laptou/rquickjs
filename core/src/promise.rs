@@ -1,6 +1,6 @@
 //! Utilities for converting promises to futures and vice versa.
 
-use std::{
+use core::{
     cell::Cell,
     future::Future,
     pin::Pin,
@@ -131,6 +131,7 @@ where
             };
             // TODO figure out something better to do here.
             if let Err(e) = err {
+                #[cfg(feature = "std")]
                 println!("promise handle function returned error:{}", e);
             }
         };
@@ -141,7 +142,7 @@ where
 
 #[cfg(test)]
 mod test {
-    use std::time::Duration;
+    use core::time::Duration;
 
     use super::*;
     use crate::{

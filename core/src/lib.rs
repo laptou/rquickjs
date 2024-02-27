@@ -1,5 +1,7 @@
 #![allow(dead_code)]
 
+#![no_std]
+
 //! # High-level bindings to QuickJS
 //!
 //! The `rquickjs` crate provides safe high-level bindings to the [QuickJS](https://bellard.org/quickjs/) JavaScript engine.
@@ -7,6 +9,12 @@
 
 #![allow(clippy::needless_lifetimes)]
 #![cfg_attr(feature = "doc-cfg", feature(doc_cfg))]
+
+#[cfg(feature = "std")]
+extern crate std;
+
+#[macro_use]
+extern crate alloc;
 
 //#[doc(hidden)]
 pub mod qjs {
@@ -36,7 +44,7 @@ macro_rules! cstr {
             }
         }
         no_null($str.as_bytes());
-        unsafe { std::ffi::CStr::from_bytes_with_nul_unchecked(concat!($str, "\0").as_bytes()) }
+        unsafe { core::ffi::CStr::from_bytes_with_nul_unchecked(concat!($str, "\0").as_bytes()) }
     }};
 }
 
@@ -73,7 +81,8 @@ pub use class::Class;
 #[cfg_attr(feature = "doc-cfg", doc(cfg(feature = "array-buffer")))]
 pub use value::{ArrayBuffer, TypedArray};
 
-pub(crate) use std::{result::Result as StdResult, string::String as StdString};
+pub(crate) use core::result::Result as StdResult;
+pub(crate) use alloc::string::String as StdString;
 
 #[cfg(feature = "futures")]
 #[cfg_attr(feature = "doc-cfg", doc(cfg(feature = "futures")))]

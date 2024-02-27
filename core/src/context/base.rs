@@ -1,4 +1,4 @@
-use std::{mem, ptr::NonNull};
+use core::{mem, ptr::NonNull};
 
 use crate::{class::Class, function::RustFunction, qjs, Ctx, Error, Result, Runtime};
 
@@ -139,6 +139,7 @@ impl Drop for Context {
                     // We should still free the context.
                     // TODO see if there is a way to recover from a panic which could cause the
                     // following assertion to trigger
+                    #[cfg(feature = "std")]
                     assert!(std::thread::panicking());
                 }
                 unsafe { qjs::JS_FreeContext(self.0.ctx.as_ptr()) }
@@ -213,7 +214,7 @@ mod test {
     #[test]
     #[cfg(feature = "parallel")]
     fn parallel() {
-        use std::thread;
+        use core::thread;
 
         let rt = Runtime::new().unwrap();
         let ctx = Context::full(&rt).unwrap();
@@ -233,7 +234,7 @@ mod test {
     #[test]
     #[cfg(feature = "parallel")]
     fn parallel_drop() {
-        use std::{
+        use core::{
             sync::{Arc, Barrier},
             thread,
         };
@@ -246,7 +247,7 @@ mod test {
         let wait_for_entry_c = wait_for_entry.clone();
         thread::spawn(move || {
             wait_for_entry_c.wait();
-            std::mem::drop(ctx_1);
+            core::mem::drop(ctx_1);
             println!("done");
         });
 

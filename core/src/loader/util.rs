@@ -1,3 +1,4 @@
+use alloc::string::String;
 use relative_path::RelativePath;
 
 pub fn resolve_simple(base: &str, name: &str) -> String {

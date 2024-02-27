@@ -1,13 +1,10 @@
-use std::{
-    convert::TryInto,
-    ffi::{CStr, CString},
-    fs, mem,
-    path::Path,
-    ptr::NonNull,
-};
+#[cfg(feature = "std")]
+use std::{fs, path::Path};
+use alloc::{ffi::CString, vec::Vec};
+use core::{convert::TryInto, ffi::CStr, mem, ptr::NonNull};
 
 #[cfg(feature = "futures")]
-use std::future::Future;
+use core::future::Future;
 
 #[cfg(feature = "futures")]
 use crate::AsyncContext;
@@ -151,10 +148,12 @@ impl<'js> Ctx<'js> {
     }
 
     /// Evaluate a script directly from a file.
+    #[cfg(feature = "std")]
     pub fn eval_file<V: FromJs<'js>, P: AsRef<Path>>(&self, path: P) -> Result<V> {
         self.eval_file_with_options(path, Default::default())
     }
 
+    #[cfg(feature = "std")]
     pub fn eval_file_with_options<V: FromJs<'js>, P: AsRef<Path>>(
         &self,
         path: P,

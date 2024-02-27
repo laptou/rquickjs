@@ -1,4 +1,4 @@
-use std::panic::AssertUnwindSafe;
+use core::panic::AssertUnwindSafe;
 
 use crate::{
     class::{Class, ClassId, JsClass, Readable, Trace, Tracer},
@@ -6,6 +6,7 @@ use crate::{
     value::function::{Params, StaticJsFunction},
     Ctx, FromJs, Function, Object, Outlive, Result, Value,
 };
+use alloc::boxed::Box;
 pub use mac::static_fn;
 
 use super::Constructor;
@@ -22,12 +23,23 @@ pub unsafe extern "C" fn js_callback_class<F: StaticJsFunction>(
     let args = Params::from_ffi_class(ctx, function, this, argc, argv, _flags);
     let ctx = args.ctx().clone();
 
-    ctx.handle_panic(AssertUnwindSafe(|| {
+    #[cfg(feature = "std")]
+    let value = ctx.handle_panic(AssertUnwindSafe(|| {
         let value = F::call(args)
             .map(Value::into_js_value)
             .unwrap_or_else(|error| error.throw(&ctx));
         value
-    }))
+    }));
+
+    #[cfg(not(feature = "std"))] 
+    let value = {
+        let value = F::call(args)
+            .map(Value::into_js_value)
+            .unwrap_or_else(|error| error.throw(&ctx));
+        value
+    };
+
+    value
 }
 
 pub unsafe extern "C" fn defer_call_job(

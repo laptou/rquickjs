@@ -3,11 +3,17 @@ use crate::{
     module::ModuleDataKind,
     Ctx, Lock, Module, Mut, Ref, Result,
 };
-use std::{
-    collections::{hash_map::Iter as HashMapIter, HashMap},
+use core::{
     iter::{ExactSizeIterator, FusedIterator},
     ops::{Deref, DerefMut},
 };
+use alloc::{string::String, vec::Vec};
+
+#[cfg(feature = "std")]
+use std::collections::{hash_map::Iter as MapIter, HashMap as Map};
+
+#[cfg(not(feature = "std"))]
+use alloc::collections::{btree_map::Iter as MapIter, BTreeMap as Map};
 
 /// Modules compiling data
 #[derive(Default, Clone)]
@@ -83,7 +89,7 @@ impl<'i, 'r: 'i> IntoIterator for &'r ResolvedModules<'i> {
 /// An iterator over resolved modules
 ///
 /// Each item is a tuple consists of module name and path.
-pub struct ResolvedModulesIter<'r>(HashMapIter<'r, String, String>);
+pub struct ResolvedModulesIter<'r>(MapIter<'r, String, String>);
 
 impl<'i> Iterator for ResolvedModulesIter<'i> {
     type Item = (&'i str, &'i str);
@@ -164,7 +170,7 @@ impl<'i> FusedIterator for CompiledBytecodesIter<'i> {}
 #[derive(Debug, Default)]
 struct CompileData {
     // { module_path: internal_name }
-    modules: HashMap<String, String>,
+    modules: Map<String, String>,
     // [ (module_path, module_bytecode) ]
     bytecodes: Vec<(String, Vec<u8>)>,
 }
@@ -191,7 +197,7 @@ where
         assert!(
             matches!(data.kind(), ModuleDataKind::Source(_) | ModuleDataKind::ByteCode(_)) ,
             "can't compile native modules, loader `{}` returned a native module, but `Compile` can only handle modules loaded from source or bytecode",
-            std::any::type_name::<L>()
+            core::any::type_name::<L>()
         );
         let module = data.unsafe_declare(ctx.clone())?;
         let data = module.write_object(false)?;

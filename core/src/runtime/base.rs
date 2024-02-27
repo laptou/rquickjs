@@ -1,9 +1,12 @@
 //! QuickJS runtime related types.
 
+use alloc::vec::Vec;
+
 #[cfg(feature = "loader")]
 use crate::loader::{RawLoader, Resolver};
 use crate::{result::JobException, Context, Error, Mut, Ref, Result, Weak};
-use std::{ffi::CString, ptr::NonNull, result::Result as StdResult};
+use core::{ptr::NonNull, result::Result as StdResult};
+use alloc::ffi::CString;
 
 #[cfg(feature = "allocator")]
 use crate::allocator::Allocator;

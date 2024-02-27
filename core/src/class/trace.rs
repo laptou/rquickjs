@@ -1,4 +1,6 @@
-use std::marker::PhantomData;
+use core::marker::PhantomData;
+
+use alloc::{string::String, vec::Vec};
 
 use crate::{markers::Invariant, qjs, Class, Ctx, Value};
 
@@ -187,9 +189,9 @@ trace_impls! {
 
 trace_impls! {
     ref:
-    Box,
-    std::rc::Rc,
-    std::sync::Arc,
+    alloc::boxed::Box,
+    alloc::rc::Rc,
+    alloc::sync::Arc,
 }
 
 trace_impls! {
@@ -216,10 +218,11 @@ trace_impls! {
 trace_impls! {
     list:
     Vec,
-    std::collections::VecDeque,
-    std::collections::LinkedList,
-    std::collections::HashSet {S},
-    std::collections::BTreeSet,
+    alloc::collections::VecDeque,
+    alloc::collections::LinkedList,
+    #[cfg(feature = "std")]
+    core::collections::HashSet {S},
+    alloc::collections::BTreeSet,
     #[cfg(feature = "indexmap")]
     #[cfg_attr(feature = "doc-cfg", doc(cfg(all(feature = "classes", feature = "indexmap"))))]
     indexmap::IndexSet {S},
@@ -227,8 +230,9 @@ trace_impls! {
 
 trace_impls! {
     map:
-    std::collections::HashMap {S},
-    std::collections::BTreeMap,
+    #[cfg(feature = "std")]
+    alloc::collections::HashMap {S},
+    alloc::collections::BTreeMap,
     #[cfg(feature = "indexmap")]
     #[cfg_attr(feature = "doc-cfg", doc(cfg(all(feature = "classes", feature = "indexmap"))))]
     indexmap::IndexMap {S},

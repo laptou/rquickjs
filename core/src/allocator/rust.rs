@@ -1,14 +1,11 @@
-use std::{
-    alloc::{alloc, dealloc, realloc, Layout},
-    mem::size_of,
-    ptr::null_mut,
-};
+use alloc::alloc::{alloc, dealloc, realloc, Layout};
+use core::{mem::size_of, ptr::null_mut};
 
 use super::{Allocator, RawMemPtr};
 
 /// The largest value QuickJS will allocate is a u64;
 /// So all allocated memory must have the same alignment is this largest size.
-const ALLOC_ALIGN: usize = std::mem::align_of::<u64>();
+const ALLOC_ALIGN: usize = core::mem::align_of::<u64>();
 
 #[derive(Copy, Clone)]
 #[repr(transparent)]
@@ -109,7 +106,7 @@ unsafe impl Allocator for RustAllocator {
 mod test {
     use super::RustAllocator;
     use crate::{allocator::Allocator, Context, Runtime};
-    use std::sync::atomic::{AtomicUsize, Ordering};
+    use core::sync::atomic::{AtomicUsize, Ordering};
 
     static ALLOC_SIZE: AtomicUsize = AtomicUsize::new(0);
 

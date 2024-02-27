@@ -1,13 +1,19 @@
 use crate::{loader::Resolver, Ctx, Error, Result};
+use alloc::string::String;
 use relative_path::RelativePath;
-use std::collections::HashSet;
+
+#[cfg(feature = "std")]
+use std::collections::HashSet as Set;
+
+#[cfg(not(feature = "std"))]
+use alloc::collections::BTreeSet as Set;
 
 /// The builtin module resolver
 ///
 /// This resolver can also be used as the nested backing resolver in user-defined resolvers.
 #[derive(Debug, Default)]
 pub struct BuiltinResolver {
-    modules: HashSet<String>,
+    modules: Set<String>,
 }
 
 impl BuiltinResolver {

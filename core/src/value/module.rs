@@ -1,17 +1,17 @@
 //! Types for loading and handling JS modules.
 
-use std::{
-    borrow::Cow,
-    collections::HashSet,
-    ffi::{CStr, CString},
+use core::{
+    ffi::CStr,
     fmt,
     mem::MaybeUninit,
     ptr::{self, NonNull},
     slice,
 };
 
+use alloc::{borrow::Cow, collections::BTreeSet, ffi::CString, vec::Vec};
+
 #[cfg(feature = "exports")]
-use std::marker::PhantomData;
+use core::marker::PhantomData;
 
 use crate::{qjs, Atom, Context, Ctx, Error, FromAtom, FromJs, IntoJs, Result, Value};
 
@@ -278,13 +278,13 @@ impl Default for ModulesBuilder {
 ///
 /// Struct used in the [`ModuleDef`] trait for declaring module exports.
 pub struct Declarations {
-    declarations: HashSet<Cow<'static, CStr>>,
+    declarations: BTreeSet<Cow<'static, CStr>>,
 }
 
 impl Declarations {
     pub(crate) fn new() -> Self {
         Declarations {
-            declarations: HashSet::new(),
+            declarations: BTreeSet::new(),
         }
     }
 
@@ -840,7 +840,7 @@ impl<'js> Module<'js> {
                 self.ctx.clone(),
                 qjs::JS_GetModuleExportEntryName(self.ctx.as_ptr(), ptr, i),
             );
-            println!("{}", atom_name.to_string().unwrap());
+            // println!("{}", atom_name.to_string().unwrap());
         }
     }
 }

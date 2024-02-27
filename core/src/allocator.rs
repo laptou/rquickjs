@@ -1,9 +1,10 @@
 //! Tools for using different allocators with QuickJS.
 
 use crate::qjs;
-use std::{convert::TryInto, ptr};
+use core::{convert::TryInto, ptr};
 
 mod rust;
+use alloc::boxed::Box;
 pub use rust::RustAllocator;
 
 /// Raw memory pointer

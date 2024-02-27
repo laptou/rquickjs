@@ -1,4 +1,4 @@
-use std::{
+use core::{
     cell::RefCell,
     future::Future,
     pin::{pin, Pin},
@@ -63,7 +63,7 @@ pub struct SpawnFuture<'a, 'js>(&'a Spawner<'js>);
 impl<'a, 'js> Future for SpawnFuture<'a, 'js> {
     type Output = bool;
 
-    fn poll(self: Pin<&mut Self>, cx: &mut std::task::Context<'_>) -> Poll<Self::Output> {
+    fn poll(self: Pin<&mut Self>, cx: &mut core::task::Context<'_>) -> Poll<Self::Output> {
         if self.0.futures.borrow().is_empty() {
             return Poll::Ready(false);
         }
@@ -122,7 +122,7 @@ impl DriveFuture {
 impl Future for DriveFuture {
     type Output = ();
 
-    fn poll(mut self: Pin<&mut Self>, cx: &mut std::task::Context<'_>) -> Poll<Self::Output> {
+    fn poll(mut self: Pin<&mut Self>, cx: &mut core::task::Context<'_>) -> Poll<Self::Output> {
         loop {
             let mut lock = match self.state {
                 DriveFutureState::Initial => {

@@ -1,3 +1,5 @@
+use alloc::{string::String, vec::Vec};
+
 use crate::{
     loader::util::check_extensions, module::ModuleData, module::ModuleLoadFn, Ctx, Error, Result,
 };

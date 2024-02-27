@@ -1,7 +1,5 @@
-use std::{
-    any::Any, ffi::CString, marker::PhantomData, mem, panic, ptr::NonNull,
-    result::Result as StdResult,
-};
+use core::{any::Any, marker::PhantomData, mem, panic, ptr::NonNull, result::Result as StdResult};
+use alloc::{boxed::Box, ffi::CString};
 
 #[cfg(feature = "allocator")]
 use crate::allocator::{Allocator, AllocatorHolder};
@@ -228,10 +226,11 @@ impl RawRuntime {
     /// If the provided closure returns `true` the interpreter will raise and uncatchable
     /// exception and return control flow to the caller.
     pub unsafe fn set_interrupt_handler(&mut self, handler: Option<InterruptHandler>) {
+        #[cfg(feature = "std")]
         unsafe extern "C" fn interrupt_handler_trampoline(
             _rt: *mut qjs::JSRuntime,
-            opaque: *mut ::std::os::raw::c_void,
-        ) -> ::std::os::raw::c_int {
+            opaque: *mut ::core::ffi::c_void,
+        ) -> ::core::ffi::c_int {
             let catch_unwind = panic::catch_unwind(move || {
                 let opaque = &mut *(opaque as *mut Opaque);
                 opaque.interrupt_handler.as_mut().expect("handler is set")()
@@ -249,6 +248,15 @@ impl RawRuntime {
             };
             should_interrupt as _
         }
+
+        #[cfg(not(feature = "std"))]
+        unsafe extern "C" fn interrupt_handler_trampoline(
+            _rt: *mut qjs::JSRuntime,
+            opaque: *mut ::core::ffi::c_void,
+        ) -> ::core::ffi::c_int {
+            false as _
+        }
+
 
         qjs::JS_SetInterruptHandler(
             self.rt.as_ptr(),
