@@ -57,7 +57,7 @@ pub const JS_DEF_PROP_DOUBLE: u32 = 6;
 pub const JS_DEF_PROP_UNDEFINED: u32 = 7;
 pub const JS_DEF_OBJECT: u32 = 8;
 pub const JS_DEF_ALIAS: u32 = 9;
-pub type size_t = ::std::os::raw::c_ulonglong;
+pub type size_t = ::core::ffi::c_ulonglong;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSRuntime {
@@ -97,28 +97,28 @@ pub const JS_TAG_UNINITIALIZED: _bindgen_ty_1 = 4;
 pub const JS_TAG_CATCH_OFFSET: _bindgen_ty_1 = 5;
 pub const JS_TAG_EXCEPTION: _bindgen_ty_1 = 6;
 pub const JS_TAG_FLOAT64: _bindgen_ty_1 = 7;
-pub type _bindgen_ty_1 = ::std::os::raw::c_int;
+pub type _bindgen_ty_1 = ::core::ffi::c_int;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSRefCountHeader {
-    pub ref_count: ::std::os::raw::c_int,
+    pub ref_count: ::core::ffi::c_int,
 }
 #[test]
 fn bindgen_test_layout_JSRefCountHeader() {
-    const UNINIT: ::std::mem::MaybeUninit<JSRefCountHeader> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSRefCountHeader> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSRefCountHeader>(),
+        ::core::mem::size_of::<JSRefCountHeader>(),
         4usize,
         concat!("Size of: ", stringify!(JSRefCountHeader))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSRefCountHeader>(),
+        ::core::mem::align_of::<JSRefCountHeader>(),
         4usize,
         concat!("Alignment of ", stringify!(JSRefCountHeader))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).ref_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).ref_count) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -133,24 +133,24 @@ fn bindgen_test_layout_JSRefCountHeader() {
 pub union JSValueUnion {
     pub int32: i32,
     pub float64: f64,
-    pub ptr: *mut ::std::os::raw::c_void,
+    pub ptr: *mut ::core::ffi::c_void,
 }
 #[test]
 fn bindgen_test_layout_JSValueUnion() {
-    const UNINIT: ::std::mem::MaybeUninit<JSValueUnion> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSValueUnion> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSValueUnion>(),
+        ::core::mem::size_of::<JSValueUnion>(),
         8usize,
         concat!("Size of: ", stringify!(JSValueUnion))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSValueUnion>(),
+        ::core::mem::align_of::<JSValueUnion>(),
         8usize,
         concat!("Alignment of ", stringify!(JSValueUnion))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).int32) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).int32) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -160,7 +160,7 @@ fn bindgen_test_layout_JSValueUnion() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).float64) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).float64) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -170,7 +170,7 @@ fn bindgen_test_layout_JSValueUnion() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).ptr) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).ptr) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -188,20 +188,20 @@ pub struct JSValue {
 }
 #[test]
 fn bindgen_test_layout_JSValue() {
-    const UNINIT: ::std::mem::MaybeUninit<JSValue> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSValue> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSValue>(),
+        ::core::mem::size_of::<JSValue>(),
         16usize,
         concat!("Size of: ", stringify!(JSValue))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSValue>(),
+        ::core::mem::align_of::<JSValue>(),
         8usize,
         concat!("Alignment of ", stringify!(JSValue))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).u) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).u) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -211,7 +211,7 @@ fn bindgen_test_layout_JSValue() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).tag) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).tag) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -221,30 +221,30 @@ fn bindgen_test_layout_JSValue() {
         )
     );
 }
-pub type JSCFunction = ::std::option::Option<
+pub type JSCFunction = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
         this_val: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue,
 >;
-pub type JSCFunctionMagic = ::std::option::Option<
+pub type JSCFunctionMagic = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
         this_val: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
-        magic: ::std::os::raw::c_int,
+        magic: ::core::ffi::c_int,
     ) -> JSValue,
 >;
-pub type JSCFunctionData = ::std::option::Option<
+pub type JSCFunctionData = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
         this_val: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
-        magic: ::std::os::raw::c_int,
+        magic: ::core::ffi::c_int,
         func_data: *mut JSValue,
     ) -> JSValue,
 >;
@@ -254,24 +254,24 @@ pub struct JSMallocState {
     pub malloc_count: size_t,
     pub malloc_size: size_t,
     pub malloc_limit: size_t,
-    pub opaque: *mut ::std::os::raw::c_void,
+    pub opaque: *mut ::core::ffi::c_void,
 }
 #[test]
 fn bindgen_test_layout_JSMallocState() {
-    const UNINIT: ::std::mem::MaybeUninit<JSMallocState> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSMallocState> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSMallocState>(),
+        ::core::mem::size_of::<JSMallocState>(),
         32usize,
         concat!("Size of: ", stringify!(JSMallocState))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSMallocState>(),
+        ::core::mem::align_of::<JSMallocState>(),
         8usize,
         concat!("Alignment of ", stringify!(JSMallocState))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).malloc_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).malloc_count) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -281,7 +281,7 @@ fn bindgen_test_layout_JSMallocState() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).malloc_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).malloc_size) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -291,7 +291,7 @@ fn bindgen_test_layout_JSMallocState() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).malloc_limit) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).malloc_limit) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -301,7 +301,7 @@ fn bindgen_test_layout_JSMallocState() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).opaque) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).opaque) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -314,38 +314,38 @@ fn bindgen_test_layout_JSMallocState() {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSMallocFunctions {
-    pub js_malloc: ::std::option::Option<
-        unsafe extern "C" fn(s: *mut JSMallocState, size: size_t) -> *mut ::std::os::raw::c_void,
+    pub js_malloc: ::core::option::Option<
+        unsafe extern "C" fn(s: *mut JSMallocState, size: size_t) -> *mut ::core::ffi::c_void,
     >,
-    pub js_free: ::std::option::Option<
-        unsafe extern "C" fn(s: *mut JSMallocState, ptr: *mut ::std::os::raw::c_void),
+    pub js_free: ::core::option::Option<
+        unsafe extern "C" fn(s: *mut JSMallocState, ptr: *mut ::core::ffi::c_void),
     >,
-    pub js_realloc: ::std::option::Option<
+    pub js_realloc: ::core::option::Option<
         unsafe extern "C" fn(
             s: *mut JSMallocState,
-            ptr: *mut ::std::os::raw::c_void,
+            ptr: *mut ::core::ffi::c_void,
             size: size_t,
-        ) -> *mut ::std::os::raw::c_void,
+        ) -> *mut ::core::ffi::c_void,
     >,
     pub js_malloc_usable_size:
-        ::std::option::Option<unsafe extern "C" fn(ptr: *const ::std::os::raw::c_void) -> size_t>,
+        ::core::option::Option<unsafe extern "C" fn(ptr: *const ::core::ffi::c_void) -> size_t>,
 }
 #[test]
 fn bindgen_test_layout_JSMallocFunctions() {
-    const UNINIT: ::std::mem::MaybeUninit<JSMallocFunctions> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSMallocFunctions> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSMallocFunctions>(),
+        ::core::mem::size_of::<JSMallocFunctions>(),
         32usize,
         concat!("Size of: ", stringify!(JSMallocFunctions))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSMallocFunctions>(),
+        ::core::mem::align_of::<JSMallocFunctions>(),
         8usize,
         concat!("Alignment of ", stringify!(JSMallocFunctions))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_malloc) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_malloc) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -355,7 +355,7 @@ fn bindgen_test_layout_JSMallocFunctions() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_free) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_free) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -365,7 +365,7 @@ fn bindgen_test_layout_JSMallocFunctions() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_realloc) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_realloc) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -375,7 +375,7 @@ fn bindgen_test_layout_JSMallocFunctions() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_malloc_usable_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_malloc_usable_size) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -394,7 +394,7 @@ extern "C" {
     pub fn JS_NewRuntime() -> *mut JSRuntime;
 }
 extern "C" {
-    pub fn JS_SetRuntimeInfo(rt: *mut JSRuntime, info: *const ::std::os::raw::c_char);
+    pub fn JS_SetRuntimeInfo(rt: *mut JSRuntime, info: *const ::core::ffi::c_char);
 }
 extern "C" {
     pub fn JS_SetMemoryLimit(rt: *mut JSRuntime, limit: size_t);
@@ -411,20 +411,20 @@ extern "C" {
 extern "C" {
     pub fn JS_NewRuntime2(
         mf: *const JSMallocFunctions,
-        opaque: *mut ::std::os::raw::c_void,
+        opaque: *mut ::core::ffi::c_void,
     ) -> *mut JSRuntime;
 }
 extern "C" {
     pub fn JS_FreeRuntime(rt: *mut JSRuntime);
 }
 extern "C" {
-    pub fn JS_GetRuntimeOpaque(rt: *mut JSRuntime) -> *mut ::std::os::raw::c_void;
+    pub fn JS_GetRuntimeOpaque(rt: *mut JSRuntime) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn JS_SetRuntimeOpaque(rt: *mut JSRuntime, opaque: *mut ::std::os::raw::c_void);
+    pub fn JS_SetRuntimeOpaque(rt: *mut JSRuntime, opaque: *mut ::core::ffi::c_void);
 }
 pub type JS_MarkFunc =
-    ::std::option::Option<unsafe extern "C" fn(rt: *mut JSRuntime, gp: *mut JSGCObjectHeader)>;
+    ::core::option::Option<unsafe extern "C" fn(rt: *mut JSRuntime, gp: *mut JSGCObjectHeader)>;
 extern "C" {
     pub fn JS_MarkValue(rt: *mut JSRuntime, val: JSValue, mark_func: JS_MarkFunc);
 }
@@ -432,7 +432,7 @@ extern "C" {
     pub fn JS_RunGC(rt: *mut JSRuntime);
 }
 extern "C" {
-    pub fn JS_IsLiveObject(rt: *mut JSRuntime, obj: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsLiveObject(rt: *mut JSRuntime, obj: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_NewContext(rt: *mut JSRuntime) -> *mut JSContext;
@@ -444,10 +444,10 @@ extern "C" {
     pub fn JS_DupContext(ctx: *mut JSContext) -> *mut JSContext;
 }
 extern "C" {
-    pub fn JS_GetContextOpaque(ctx: *mut JSContext) -> *mut ::std::os::raw::c_void;
+    pub fn JS_GetContextOpaque(ctx: *mut JSContext) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn JS_SetContextOpaque(ctx: *mut JSContext, opaque: *mut ::std::os::raw::c_void);
+    pub fn JS_SetContextOpaque(ctx: *mut JSContext, opaque: *mut ::core::ffi::c_void);
 }
 extern "C" {
     pub fn JS_GetRuntime(ctx: *mut JSContext) -> *mut JSRuntime;
@@ -507,78 +507,78 @@ extern "C" {
     pub fn JS_AddIntrinsicOperators(ctx: *mut JSContext);
 }
 extern "C" {
-    pub fn JS_EnableBignumExt(ctx: *mut JSContext, enable: ::std::os::raw::c_int);
+    pub fn JS_EnableBignumExt(ctx: *mut JSContext, enable: ::core::ffi::c_int);
 }
 extern "C" {
     pub fn js_string_codePointRange(
         ctx: *mut JSContext,
         this_val: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue;
 }
 extern "C" {
-    pub fn js_malloc_rt(rt: *mut JSRuntime, size: size_t) -> *mut ::std::os::raw::c_void;
+    pub fn js_malloc_rt(rt: *mut JSRuntime, size: size_t) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn js_free_rt(rt: *mut JSRuntime, ptr: *mut ::std::os::raw::c_void);
+    pub fn js_free_rt(rt: *mut JSRuntime, ptr: *mut ::core::ffi::c_void);
 }
 extern "C" {
     pub fn js_realloc_rt(
         rt: *mut JSRuntime,
-        ptr: *mut ::std::os::raw::c_void,
+        ptr: *mut ::core::ffi::c_void,
         size: size_t,
-    ) -> *mut ::std::os::raw::c_void;
+    ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
     pub fn js_malloc_usable_size_rt(
         rt: *mut JSRuntime,
-        ptr: *const ::std::os::raw::c_void,
+        ptr: *const ::core::ffi::c_void,
     ) -> size_t;
 }
 extern "C" {
-    pub fn js_mallocz_rt(rt: *mut JSRuntime, size: size_t) -> *mut ::std::os::raw::c_void;
+    pub fn js_mallocz_rt(rt: *mut JSRuntime, size: size_t) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn js_malloc(ctx: *mut JSContext, size: size_t) -> *mut ::std::os::raw::c_void;
+    pub fn js_malloc(ctx: *mut JSContext, size: size_t) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn js_free(ctx: *mut JSContext, ptr: *mut ::std::os::raw::c_void);
+    pub fn js_free(ctx: *mut JSContext, ptr: *mut ::core::ffi::c_void);
 }
 extern "C" {
     pub fn js_realloc(
         ctx: *mut JSContext,
-        ptr: *mut ::std::os::raw::c_void,
+        ptr: *mut ::core::ffi::c_void,
         size: size_t,
-    ) -> *mut ::std::os::raw::c_void;
+    ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn js_malloc_usable_size(ctx: *mut JSContext, ptr: *const ::std::os::raw::c_void)
+    pub fn js_malloc_usable_size(ctx: *mut JSContext, ptr: *const ::core::ffi::c_void)
         -> size_t;
 }
 extern "C" {
     pub fn js_realloc2(
         ctx: *mut JSContext,
-        ptr: *mut ::std::os::raw::c_void,
+        ptr: *mut ::core::ffi::c_void,
         size: size_t,
         pslack: *mut size_t,
-    ) -> *mut ::std::os::raw::c_void;
+    ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-    pub fn js_mallocz(ctx: *mut JSContext, size: size_t) -> *mut ::std::os::raw::c_void;
+    pub fn js_mallocz(ctx: *mut JSContext, size: size_t) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
     pub fn js_strdup(
         ctx: *mut JSContext,
-        str_: *const ::std::os::raw::c_char,
-    ) -> *mut ::std::os::raw::c_char;
+        str_: *const ::core::ffi::c_char,
+    ) -> *mut ::core::ffi::c_char;
 }
 extern "C" {
     pub fn js_strndup(
         ctx: *mut JSContext,
-        s: *const ::std::os::raw::c_char,
+        s: *const ::core::ffi::c_char,
         n: size_t,
-    ) -> *mut ::std::os::raw::c_char;
+    ) -> *mut ::core::ffi::c_char;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -614,20 +614,20 @@ pub struct JSMemoryUsage {
 }
 #[test]
 fn bindgen_test_layout_JSMemoryUsage() {
-    const UNINIT: ::std::mem::MaybeUninit<JSMemoryUsage> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSMemoryUsage> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSMemoryUsage>(),
+        ::core::mem::size_of::<JSMemoryUsage>(),
         224usize,
         concat!("Size of: ", stringify!(JSMemoryUsage))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSMemoryUsage>(),
+        ::core::mem::align_of::<JSMemoryUsage>(),
         8usize,
         concat!("Alignment of ", stringify!(JSMemoryUsage))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).malloc_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).malloc_size) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -637,7 +637,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).malloc_limit) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).malloc_limit) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -647,7 +647,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).memory_used_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).memory_used_size) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -657,7 +657,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).malloc_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).malloc_count) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -667,7 +667,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).memory_used_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).memory_used_count) as usize - ptr as usize },
         32usize,
         concat!(
             "Offset of field: ",
@@ -677,7 +677,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).atom_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).atom_count) as usize - ptr as usize },
         40usize,
         concat!(
             "Offset of field: ",
@@ -687,7 +687,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).atom_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).atom_size) as usize - ptr as usize },
         48usize,
         concat!(
             "Offset of field: ",
@@ -697,7 +697,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).str_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).str_count) as usize - ptr as usize },
         56usize,
         concat!(
             "Offset of field: ",
@@ -707,7 +707,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).str_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).str_size) as usize - ptr as usize },
         64usize,
         concat!(
             "Offset of field: ",
@@ -717,7 +717,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).obj_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).obj_count) as usize - ptr as usize },
         72usize,
         concat!(
             "Offset of field: ",
@@ -727,7 +727,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).obj_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).obj_size) as usize - ptr as usize },
         80usize,
         concat!(
             "Offset of field: ",
@@ -737,7 +737,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).prop_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).prop_count) as usize - ptr as usize },
         88usize,
         concat!(
             "Offset of field: ",
@@ -747,7 +747,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).prop_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).prop_size) as usize - ptr as usize },
         96usize,
         concat!(
             "Offset of field: ",
@@ -757,7 +757,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).shape_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).shape_count) as usize - ptr as usize },
         104usize,
         concat!(
             "Offset of field: ",
@@ -767,7 +767,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).shape_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).shape_size) as usize - ptr as usize },
         112usize,
         concat!(
             "Offset of field: ",
@@ -777,7 +777,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_count) as usize - ptr as usize },
         120usize,
         concat!(
             "Offset of field: ",
@@ -787,7 +787,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_size) as usize - ptr as usize },
         128usize,
         concat!(
             "Offset of field: ",
@@ -797,7 +797,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_code_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_code_size) as usize - ptr as usize },
         136usize,
         concat!(
             "Offset of field: ",
@@ -807,7 +807,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_pc2line_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_pc2line_count) as usize - ptr as usize },
         144usize,
         concat!(
             "Offset of field: ",
@@ -817,7 +817,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_pc2line_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_pc2line_size) as usize - ptr as usize },
         152usize,
         concat!(
             "Offset of field: ",
@@ -827,7 +827,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_pc2column_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_pc2column_count) as usize - ptr as usize },
         160usize,
         concat!(
             "Offset of field: ",
@@ -837,7 +837,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).js_func_pc2column_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).js_func_pc2column_size) as usize - ptr as usize },
         168usize,
         concat!(
             "Offset of field: ",
@@ -847,7 +847,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).c_func_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).c_func_count) as usize - ptr as usize },
         176usize,
         concat!(
             "Offset of field: ",
@@ -857,7 +857,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).array_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).array_count) as usize - ptr as usize },
         184usize,
         concat!(
             "Offset of field: ",
@@ -867,7 +867,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).fast_array_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).fast_array_count) as usize - ptr as usize },
         192usize,
         concat!(
             "Offset of field: ",
@@ -877,7 +877,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).fast_array_elements) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).fast_array_elements) as usize - ptr as usize },
         200usize,
         concat!(
             "Offset of field: ",
@@ -887,7 +887,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).binary_object_count) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).binary_object_count) as usize - ptr as usize },
         208usize,
         concat!(
             "Offset of field: ",
@@ -897,7 +897,7 @@ fn bindgen_test_layout_JSMemoryUsage() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).binary_object_size) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).binary_object_size) as usize - ptr as usize },
         216usize,
         concat!(
             "Offset of field: ",
@@ -913,12 +913,12 @@ extern "C" {
 extern "C" {
     pub fn JS_NewAtomLen(
         ctx: *mut JSContext,
-        str_: *const ::std::os::raw::c_char,
+        str_: *const ::core::ffi::c_char,
         len: size_t,
     ) -> JSAtom;
 }
 extern "C" {
-    pub fn JS_NewAtom(ctx: *mut JSContext, str_: *const ::std::os::raw::c_char) -> JSAtom;
+    pub fn JS_NewAtom(ctx: *mut JSContext, str_: *const ::core::ffi::c_char) -> JSAtom;
 }
 extern "C" {
     pub fn JS_NewAtomUInt32(ctx: *mut JSContext, n: u32) -> JSAtom;
@@ -939,7 +939,7 @@ extern "C" {
     pub fn JS_AtomToString(ctx: *mut JSContext, atom: JSAtom) -> JSValue;
 }
 extern "C" {
-    pub fn JS_AtomToCString(ctx: *mut JSContext, atom: JSAtom) -> *const ::std::os::raw::c_char;
+    pub fn JS_AtomToCString(ctx: *mut JSContext, atom: JSAtom) -> *const ::core::ffi::c_char;
 }
 extern "C" {
     pub fn JS_ValueToAtom(ctx: *mut JSContext, val: JSValue) -> JSAtom;
@@ -947,25 +947,25 @@ extern "C" {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSPropertyEnum {
-    pub is_enumerable: ::std::os::raw::c_int,
+    pub is_enumerable: ::core::ffi::c_int,
     pub atom: JSAtom,
 }
 #[test]
 fn bindgen_test_layout_JSPropertyEnum() {
-    const UNINIT: ::std::mem::MaybeUninit<JSPropertyEnum> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSPropertyEnum> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSPropertyEnum>(),
+        ::core::mem::size_of::<JSPropertyEnum>(),
         8usize,
         concat!("Size of: ", stringify!(JSPropertyEnum))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSPropertyEnum>(),
+        ::core::mem::align_of::<JSPropertyEnum>(),
         4usize,
         concat!("Alignment of ", stringify!(JSPropertyEnum))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).is_enumerable) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).is_enumerable) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -975,7 +975,7 @@ fn bindgen_test_layout_JSPropertyEnum() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).atom) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).atom) as usize - ptr as usize },
         4usize,
         concat!(
             "Offset of field: ",
@@ -988,27 +988,27 @@ fn bindgen_test_layout_JSPropertyEnum() {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct JSPropertyDescriptor {
-    pub flags: ::std::os::raw::c_int,
+    pub flags: ::core::ffi::c_int,
     pub value: JSValue,
     pub getter: JSValue,
     pub setter: JSValue,
 }
 #[test]
 fn bindgen_test_layout_JSPropertyDescriptor() {
-    const UNINIT: ::std::mem::MaybeUninit<JSPropertyDescriptor> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSPropertyDescriptor> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSPropertyDescriptor>(),
+        ::core::mem::size_of::<JSPropertyDescriptor>(),
         56usize,
         concat!("Size of: ", stringify!(JSPropertyDescriptor))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSPropertyDescriptor>(),
+        ::core::mem::align_of::<JSPropertyDescriptor>(),
         8usize,
         concat!("Alignment of ", stringify!(JSPropertyDescriptor))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).flags) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).flags) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -1018,7 +1018,7 @@ fn bindgen_test_layout_JSPropertyDescriptor() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).value) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).value) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -1028,7 +1028,7 @@ fn bindgen_test_layout_JSPropertyDescriptor() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).getter) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).getter) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -1038,7 +1038,7 @@ fn bindgen_test_layout_JSPropertyDescriptor() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).setter) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).setter) as usize - ptr as usize },
         40usize,
         concat!(
             "Offset of field: ",
@@ -1051,30 +1051,30 @@ fn bindgen_test_layout_JSPropertyDescriptor() {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSClassExoticMethods {
-    pub get_own_property: ::std::option::Option<
+    pub get_own_property: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             desc: *mut JSPropertyDescriptor,
             obj: JSValue,
             prop: JSAtom,
-        ) -> ::std::os::raw::c_int,
+        ) -> ::core::ffi::c_int,
     >,
-    pub get_own_property_names: ::std::option::Option<
+    pub get_own_property_names: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             ptab: *mut *mut JSPropertyEnum,
             plen: *mut u32,
             obj: JSValue,
-        ) -> ::std::os::raw::c_int,
+        ) -> ::core::ffi::c_int,
     >,
-    pub delete_property: ::std::option::Option<
+    pub delete_property: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             obj: JSValue,
             prop: JSAtom,
-        ) -> ::std::os::raw::c_int,
+        ) -> ::core::ffi::c_int,
     >,
-    pub define_own_property: ::std::option::Option<
+    pub define_own_property: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             this_obj: JSValue,
@@ -1082,17 +1082,17 @@ pub struct JSClassExoticMethods {
             val: JSValue,
             getter: JSValue,
             setter: JSValue,
-            flags: ::std::os::raw::c_int,
-        ) -> ::std::os::raw::c_int,
+            flags: ::core::ffi::c_int,
+        ) -> ::core::ffi::c_int,
     >,
-    pub has_property: ::std::option::Option<
+    pub has_property: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             obj: JSValue,
             atom: JSAtom,
-        ) -> ::std::os::raw::c_int,
+        ) -> ::core::ffi::c_int,
     >,
-    pub get_property: ::std::option::Option<
+    pub get_property: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             obj: JSValue,
@@ -1100,33 +1100,33 @@ pub struct JSClassExoticMethods {
             receiver: JSValue,
         ) -> JSValue,
     >,
-    pub set_property: ::std::option::Option<
+    pub set_property: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             obj: JSValue,
             atom: JSAtom,
             value: JSValue,
             receiver: JSValue,
-            flags: ::std::os::raw::c_int,
-        ) -> ::std::os::raw::c_int,
+            flags: ::core::ffi::c_int,
+        ) -> ::core::ffi::c_int,
     >,
 }
 #[test]
 fn bindgen_test_layout_JSClassExoticMethods() {
-    const UNINIT: ::std::mem::MaybeUninit<JSClassExoticMethods> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSClassExoticMethods> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSClassExoticMethods>(),
+        ::core::mem::size_of::<JSClassExoticMethods>(),
         56usize,
         concat!("Size of: ", stringify!(JSClassExoticMethods))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSClassExoticMethods>(),
+        ::core::mem::align_of::<JSClassExoticMethods>(),
         8usize,
         concat!("Alignment of ", stringify!(JSClassExoticMethods))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).get_own_property) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).get_own_property) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -1136,7 +1136,7 @@ fn bindgen_test_layout_JSClassExoticMethods() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).get_own_property_names) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).get_own_property_names) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -1146,7 +1146,7 @@ fn bindgen_test_layout_JSClassExoticMethods() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).delete_property) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).delete_property) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -1156,7 +1156,7 @@ fn bindgen_test_layout_JSClassExoticMethods() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).define_own_property) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).define_own_property) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -1166,7 +1166,7 @@ fn bindgen_test_layout_JSClassExoticMethods() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).has_property) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).has_property) as usize - ptr as usize },
         32usize,
         concat!(
             "Offset of field: ",
@@ -1176,7 +1176,7 @@ fn bindgen_test_layout_JSClassExoticMethods() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).get_property) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).get_property) as usize - ptr as usize },
         40usize,
         concat!(
             "Offset of field: ",
@@ -1186,7 +1186,7 @@ fn bindgen_test_layout_JSClassExoticMethods() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).set_property) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).set_property) as usize - ptr as usize },
         48usize,
         concat!(
             "Offset of field: ",
@@ -1197,24 +1197,24 @@ fn bindgen_test_layout_JSClassExoticMethods() {
     );
 }
 pub type JSClassFinalizer =
-    ::std::option::Option<unsafe extern "C" fn(rt: *mut JSRuntime, val: JSValue)>;
-pub type JSClassGCMark = ::std::option::Option<
+    ::core::option::Option<unsafe extern "C" fn(rt: *mut JSRuntime, val: JSValue)>;
+pub type JSClassGCMark = ::core::option::Option<
     unsafe extern "C" fn(rt: *mut JSRuntime, val: JSValue, mark_func: JS_MarkFunc),
 >;
-pub type JSClassCall = ::std::option::Option<
+pub type JSClassCall = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
         func_obj: JSValue,
         this_val: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
-        flags: ::std::os::raw::c_int,
+        flags: ::core::ffi::c_int,
     ) -> JSValue,
 >;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSClassDef {
-    pub class_name: *const ::std::os::raw::c_char,
+    pub class_name: *const ::core::ffi::c_char,
     pub finalizer: JSClassFinalizer,
     pub gc_mark: JSClassGCMark,
     pub call: JSClassCall,
@@ -1222,20 +1222,20 @@ pub struct JSClassDef {
 }
 #[test]
 fn bindgen_test_layout_JSClassDef() {
-    const UNINIT: ::std::mem::MaybeUninit<JSClassDef> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSClassDef> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSClassDef>(),
+        ::core::mem::size_of::<JSClassDef>(),
         40usize,
         concat!("Size of: ", stringify!(JSClassDef))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSClassDef>(),
+        ::core::mem::align_of::<JSClassDef>(),
         8usize,
         concat!("Alignment of ", stringify!(JSClassDef))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).class_name) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).class_name) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -1245,7 +1245,7 @@ fn bindgen_test_layout_JSClassDef() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).finalizer) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).finalizer) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -1255,7 +1255,7 @@ fn bindgen_test_layout_JSClassDef() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).gc_mark) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).gc_mark) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -1265,7 +1265,7 @@ fn bindgen_test_layout_JSClassDef() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).call) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).call) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -1275,7 +1275,7 @@ fn bindgen_test_layout_JSClassDef() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).exotic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).exotic) as usize - ptr as usize },
         32usize,
         concat!(
             "Offset of field: ",
@@ -1293,10 +1293,10 @@ extern "C" {
         rt: *mut JSRuntime,
         class_id: JSClassID,
         class_def: *const JSClassDef,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_IsRegisteredClass(rt: *mut JSRuntime, class_id: JSClassID) -> ::std::os::raw::c_int;
+    pub fn JS_IsRegisteredClass(rt: *mut JSRuntime, class_id: JSClassID) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_NewBigInt64(ctx: *mut JSContext, v: i64) -> JSValue;
@@ -1311,7 +1311,7 @@ extern "C" {
     pub fn JS_GetException(ctx: *mut JSContext) -> JSValue;
 }
 extern "C" {
-    pub fn JS_IsError(ctx: *mut JSContext, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsError(ctx: *mut JSContext, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_ResetUncatchableError(ctx: *mut JSContext);
@@ -1322,35 +1322,35 @@ extern "C" {
 extern "C" {
     pub fn JS_ThrowSyntaxError(
         ctx: *mut JSContext,
-        fmt: *const ::std::os::raw::c_char,
+        fmt: *const ::core::ffi::c_char,
         ...
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_ThrowTypeError(
         ctx: *mut JSContext,
-        fmt: *const ::std::os::raw::c_char,
+        fmt: *const ::core::ffi::c_char,
         ...
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_ThrowReferenceError(
         ctx: *mut JSContext,
-        fmt: *const ::std::os::raw::c_char,
+        fmt: *const ::core::ffi::c_char,
         ...
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_ThrowRangeError(
         ctx: *mut JSContext,
-        fmt: *const ::std::os::raw::c_char,
+        fmt: *const ::core::ffi::c_char,
         ...
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_ThrowInternalError(
         ctx: *mut JSContext,
-        fmt: *const ::std::os::raw::c_char,
+        fmt: *const ::core::ffi::c_char,
         ...
     ) -> JSValue;
 }
@@ -1364,47 +1364,47 @@ extern "C" {
     pub fn __JS_FreeValueRT(rt: *mut JSRuntime, v: JSValue);
 }
 extern "C" {
-    pub fn JS_ToBool(ctx: *mut JSContext, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_ToBool(ctx: *mut JSContext, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_ToInt32(ctx: *mut JSContext, pres: *mut i32, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_ToInt32(ctx: *mut JSContext, pres: *mut i32, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_ToInt64(ctx: *mut JSContext, pres: *mut i64, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_ToInt64(ctx: *mut JSContext, pres: *mut i64, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_ToIndex(ctx: *mut JSContext, plen: *mut u64, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_ToIndex(ctx: *mut JSContext, plen: *mut u64, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_ToFloat64(ctx: *mut JSContext, pres: *mut f64, val: JSValue)
-        -> ::std::os::raw::c_int;
+        -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_ToBigInt64(
         ctx: *mut JSContext,
         pres: *mut i64,
         val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_ToInt64Ext(
         ctx: *mut JSContext,
         pres: *mut i64,
         val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_NewStringLen(
         ctx: *mut JSContext,
-        str1: *const ::std::os::raw::c_char,
+        str1: *const ::core::ffi::c_char,
         len1: size_t,
     ) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewString(ctx: *mut JSContext, str_: *const ::std::os::raw::c_char) -> JSValue;
+    pub fn JS_NewString(ctx: *mut JSContext, str_: *const ::core::ffi::c_char) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewAtomString(ctx: *mut JSContext, str_: *const ::std::os::raw::c_char) -> JSValue;
+    pub fn JS_NewAtomString(ctx: *mut JSContext, str_: *const ::core::ffi::c_char) -> JSValue;
 }
 extern "C" {
     pub fn JS_ToString(ctx: *mut JSContext, val: JSValue) -> JSValue;
@@ -1417,11 +1417,11 @@ extern "C" {
         ctx: *mut JSContext,
         plen: *mut size_t,
         val1: JSValue,
-        cesu8: ::std::os::raw::c_int,
-    ) -> *const ::std::os::raw::c_char;
+        cesu8: ::core::ffi::c_int,
+    ) -> *const ::core::ffi::c_char;
 }
 extern "C" {
-    pub fn JS_FreeCString(ctx: *mut JSContext, ptr: *const ::std::os::raw::c_char);
+    pub fn JS_FreeCString(ctx: *mut JSContext, ptr: *const ::core::ffi::c_char);
 }
 extern "C" {
     pub fn JS_NewObjectProtoClass(
@@ -1431,7 +1431,7 @@ extern "C" {
     ) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewObjectClass(ctx: *mut JSContext, class_id: ::std::os::raw::c_int) -> JSValue;
+    pub fn JS_NewObjectClass(ctx: *mut JSContext, class_id: ::core::ffi::c_int) -> JSValue;
 }
 extern "C" {
     pub fn JS_NewObjectProto(ctx: *mut JSContext, proto: JSValue) -> JSValue;
@@ -1440,23 +1440,23 @@ extern "C" {
     pub fn JS_NewObject(ctx: *mut JSContext) -> JSValue;
 }
 extern "C" {
-    pub fn JS_IsFunction(ctx: *mut JSContext, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsFunction(ctx: *mut JSContext, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_IsConstructor(ctx: *mut JSContext, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsConstructor(ctx: *mut JSContext, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetConstructorBit(
         ctx: *mut JSContext,
         func_obj: JSValue,
-        val: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        val: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_NewArray(ctx: *mut JSContext) -> JSValue;
 }
 extern "C" {
-    pub fn JS_IsArray(ctx: *mut JSContext, val: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsArray(ctx: *mut JSContext, val: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_GetPropertyInternal(
@@ -1464,14 +1464,14 @@ extern "C" {
         obj: JSValue,
         prop: JSAtom,
         receiver: JSValue,
-        throw_ref_error: ::std::os::raw::c_int,
+        throw_ref_error: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_GetPropertyStr(
         ctx: *mut JSContext,
         this_obj: JSValue,
-        prop: *const ::std::os::raw::c_char,
+        prop: *const ::core::ffi::c_char,
     ) -> JSValue;
 }
 extern "C" {
@@ -1483,8 +1483,8 @@ extern "C" {
         this_obj: JSValue,
         prop: JSAtom,
         val: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetPropertyUint32(
@@ -1492,7 +1492,7 @@ extern "C" {
         this_obj: JSValue,
         idx: u32,
         val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetPropertyInt64(
@@ -1500,43 +1500,43 @@ extern "C" {
         this_obj: JSValue,
         idx: i64,
         val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetPropertyStr(
         ctx: *mut JSContext,
         this_obj: JSValue,
-        prop: *const ::std::os::raw::c_char,
+        prop: *const ::core::ffi::c_char,
         val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_HasProperty(
         ctx: *mut JSContext,
         this_obj: JSValue,
         prop: JSAtom,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_IsExtensible(ctx: *mut JSContext, obj: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsExtensible(ctx: *mut JSContext, obj: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_PreventExtensions(ctx: *mut JSContext, obj: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_PreventExtensions(ctx: *mut JSContext, obj: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DeleteProperty(
         ctx: *mut JSContext,
         obj: JSValue,
         prop: JSAtom,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetPrototype(
         ctx: *mut JSContext,
         obj: JSValue,
         proto_val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_GetPrototype(ctx: *mut JSContext, val: JSValue) -> JSValue;
@@ -1547,8 +1547,8 @@ extern "C" {
         ptab: *mut *mut JSPropertyEnum,
         plen: *mut u32,
         obj: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_GetOwnProperty(
@@ -1556,14 +1556,14 @@ extern "C" {
         desc: *mut JSPropertyDescriptor,
         obj: JSValue,
         prop: JSAtom,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_Call(
         ctx: *mut JSContext,
         func_obj: JSValue,
         this_obj: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue;
 }
@@ -1572,7 +1572,7 @@ extern "C" {
         ctx: *mut JSContext,
         this_val: JSValue,
         atom: JSAtom,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue;
 }
@@ -1580,7 +1580,7 @@ extern "C" {
     pub fn JS_CallConstructor(
         ctx: *mut JSContext,
         func_obj: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue;
 }
@@ -1589,33 +1589,33 @@ extern "C" {
         ctx: *mut JSContext,
         func_obj: JSValue,
         new_target: JSValue,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_DetectModule(
-        input: *const ::std::os::raw::c_char,
+        input: *const ::core::ffi::c_char,
         input_len: size_t,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_Eval(
         ctx: *mut JSContext,
-        input: *const ::std::os::raw::c_char,
+        input: *const ::core::ffi::c_char,
         input_len: size_t,
-        filename: *const ::std::os::raw::c_char,
-        eval_flags: ::std::os::raw::c_int,
+        filename: *const ::core::ffi::c_char,
+        eval_flags: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_EvalThis(
         ctx: *mut JSContext,
         this_obj: JSValue,
-        input: *const ::std::os::raw::c_char,
+        input: *const ::core::ffi::c_char,
         input_len: size_t,
-        filename: *const ::std::os::raw::c_char,
-        eval_flags: ::std::os::raw::c_int,
+        filename: *const ::core::ffi::c_char,
+        eval_flags: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
@@ -1629,7 +1629,7 @@ extern "C" {
         ctx: *mut JSContext,
         val: JSValue,
         obj: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DefineProperty(
@@ -1639,8 +1639,8 @@ extern "C" {
         val: JSValue,
         getter: JSValue,
         setter: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DefinePropertyValue(
@@ -1648,8 +1648,8 @@ extern "C" {
         this_obj: JSValue,
         prop: JSAtom,
         val: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DefinePropertyValueUint32(
@@ -1657,17 +1657,17 @@ extern "C" {
         this_obj: JSValue,
         idx: u32,
         val: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DefinePropertyValueStr(
         ctx: *mut JSContext,
         this_obj: JSValue,
-        prop: *const ::std::os::raw::c_char,
+        prop: *const ::core::ffi::c_char,
         val: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DefinePropertyGetSet(
@@ -1676,37 +1676,37 @@ extern "C" {
         prop: JSAtom,
         getter: JSValue,
         setter: JSValue,
-        flags: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        flags: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_SetOpaque(obj: JSValue, opaque: *mut ::std::os::raw::c_void);
+    pub fn JS_SetOpaque(obj: JSValue, opaque: *mut ::core::ffi::c_void);
 }
 extern "C" {
-    pub fn JS_GetOpaque(obj: JSValue, class_id: JSClassID) -> *mut ::std::os::raw::c_void;
+    pub fn JS_GetOpaque(obj: JSValue, class_id: JSClassID) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
     pub fn JS_GetOpaque2(
         ctx: *mut JSContext,
         obj: JSValue,
         class_id: JSClassID,
-    ) -> *mut ::std::os::raw::c_void;
+    ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
     pub fn JS_ParseJSON(
         ctx: *mut JSContext,
-        buf: *const ::std::os::raw::c_char,
+        buf: *const ::core::ffi::c_char,
         buf_len: size_t,
-        filename: *const ::std::os::raw::c_char,
+        filename: *const ::core::ffi::c_char,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_ParseJSON2(
         ctx: *mut JSContext,
-        buf: *const ::std::os::raw::c_char,
+        buf: *const ::core::ffi::c_char,
         buf_len: size_t,
-        filename: *const ::std::os::raw::c_char,
-        flags: ::std::os::raw::c_int,
+        filename: *const ::core::ffi::c_char,
+        flags: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
@@ -1717,11 +1717,11 @@ extern "C" {
         space0: JSValue,
     ) -> JSValue;
 }
-pub type JSFreeArrayBufferDataFunc = ::std::option::Option<
+pub type JSFreeArrayBufferDataFunc = ::core::option::Option<
     unsafe extern "C" fn(
         rt: *mut JSRuntime,
-        opaque: *mut ::std::os::raw::c_void,
-        ptr: *mut ::std::os::raw::c_void,
+        opaque: *mut ::core::ffi::c_void,
+        ptr: *mut ::core::ffi::c_void,
     ),
 >;
 extern "C" {
@@ -1730,8 +1730,8 @@ extern "C" {
         buf: *mut u8,
         len: size_t,
         free_func: JSFreeArrayBufferDataFunc,
-        opaque: *mut ::std::os::raw::c_void,
-        is_shared: ::std::os::raw::c_int,
+        opaque: *mut ::core::ffi::c_void,
+        is_shared: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
@@ -1755,37 +1755,37 @@ extern "C" {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSSharedArrayBufferFunctions {
-    pub sab_alloc: ::std::option::Option<
+    pub sab_alloc: ::core::option::Option<
         unsafe extern "C" fn(
-            opaque: *mut ::std::os::raw::c_void,
+            opaque: *mut ::core::ffi::c_void,
             size: size_t,
-        ) -> *mut ::std::os::raw::c_void,
+        ) -> *mut ::core::ffi::c_void,
     >,
-    pub sab_free: ::std::option::Option<
-        unsafe extern "C" fn(opaque: *mut ::std::os::raw::c_void, ptr: *mut ::std::os::raw::c_void),
+    pub sab_free: ::core::option::Option<
+        unsafe extern "C" fn(opaque: *mut ::core::ffi::c_void, ptr: *mut ::core::ffi::c_void),
     >,
-    pub sab_dup: ::std::option::Option<
-        unsafe extern "C" fn(opaque: *mut ::std::os::raw::c_void, ptr: *mut ::std::os::raw::c_void),
+    pub sab_dup: ::core::option::Option<
+        unsafe extern "C" fn(opaque: *mut ::core::ffi::c_void, ptr: *mut ::core::ffi::c_void),
     >,
-    pub sab_opaque: *mut ::std::os::raw::c_void,
+    pub sab_opaque: *mut ::core::ffi::c_void,
 }
 #[test]
 fn bindgen_test_layout_JSSharedArrayBufferFunctions() {
-    const UNINIT: ::std::mem::MaybeUninit<JSSharedArrayBufferFunctions> =
-        ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSSharedArrayBufferFunctions> =
+        ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSSharedArrayBufferFunctions>(),
+        ::core::mem::size_of::<JSSharedArrayBufferFunctions>(),
         32usize,
         concat!("Size of: ", stringify!(JSSharedArrayBufferFunctions))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSSharedArrayBufferFunctions>(),
+        ::core::mem::align_of::<JSSharedArrayBufferFunctions>(),
         8usize,
         concat!("Alignment of ", stringify!(JSSharedArrayBufferFunctions))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).sab_alloc) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).sab_alloc) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -1795,7 +1795,7 @@ fn bindgen_test_layout_JSSharedArrayBufferFunctions() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).sab_free) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).sab_free) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -1805,7 +1805,7 @@ fn bindgen_test_layout_JSSharedArrayBufferFunctions() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).sab_dup) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).sab_dup) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -1815,7 +1815,7 @@ fn bindgen_test_layout_JSSharedArrayBufferFunctions() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).sab_opaque) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).sab_opaque) as usize - ptr as usize },
         24usize,
         concat!(
             "Offset of field: ",
@@ -1834,37 +1834,37 @@ extern "C" {
 extern "C" {
     pub fn JS_NewPromiseCapability(ctx: *mut JSContext, resolving_funcs: *mut JSValue) -> JSValue;
 }
-pub type JSHostPromiseRejectionTracker = ::std::option::Option<
+pub type JSHostPromiseRejectionTracker = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
         promise: JSValue,
         reason: JSValue,
-        is_handled: ::std::os::raw::c_int,
-        opaque: *mut ::std::os::raw::c_void,
+        is_handled: ::core::ffi::c_int,
+        opaque: *mut ::core::ffi::c_void,
     ),
 >;
 extern "C" {
     pub fn JS_SetHostPromiseRejectionTracker(
         rt: *mut JSRuntime,
         cb: JSHostPromiseRejectionTracker,
-        opaque: *mut ::std::os::raw::c_void,
+        opaque: *mut ::core::ffi::c_void,
     );
 }
-pub type JSInterruptHandler = ::std::option::Option<
+pub type JSInterruptHandler = ::core::option::Option<
     unsafe extern "C" fn(
         rt: *mut JSRuntime,
-        opaque: *mut ::std::os::raw::c_void,
-    ) -> ::std::os::raw::c_int,
+        opaque: *mut ::core::ffi::c_void,
+    ) -> ::core::ffi::c_int,
 >;
 extern "C" {
     pub fn JS_SetInterruptHandler(
         rt: *mut JSRuntime,
         cb: JSInterruptHandler,
-        opaque: *mut ::std::os::raw::c_void,
+        opaque: *mut ::core::ffi::c_void,
     );
 }
 extern "C" {
-    pub fn JS_SetCanBlock(rt: *mut JSRuntime, can_block: ::std::os::raw::c_int);
+    pub fn JS_SetCanBlock(rt: *mut JSRuntime, can_block: ::core::ffi::c_int);
 }
 extern "C" {
     pub fn JS_SetIsHTMLDDA(ctx: *mut JSContext, obj: JSValue);
@@ -1874,19 +1874,19 @@ extern "C" {
 pub struct JSModuleDef {
     _unused: [u8; 0],
 }
-pub type JSModuleNormalizeFunc = ::std::option::Option<
+pub type JSModuleNormalizeFunc = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
-        module_base_name: *const ::std::os::raw::c_char,
-        module_name: *const ::std::os::raw::c_char,
-        opaque: *mut ::std::os::raw::c_void,
-    ) -> *mut ::std::os::raw::c_char,
+        module_base_name: *const ::core::ffi::c_char,
+        module_name: *const ::core::ffi::c_char,
+        opaque: *mut ::core::ffi::c_void,
+    ) -> *mut ::core::ffi::c_char,
 >;
-pub type JSModuleLoaderFunc = ::std::option::Option<
+pub type JSModuleLoaderFunc = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
-        module_name: *const ::std::os::raw::c_char,
-        opaque: *mut ::std::os::raw::c_void,
+        module_name: *const ::core::ffi::c_char,
+        opaque: *mut ::core::ffi::c_void,
     ) -> *mut JSModuleDef,
 >;
 extern "C" {
@@ -1894,7 +1894,7 @@ extern "C" {
         rt: *mut JSRuntime,
         module_normalize: JSModuleNormalizeFunc,
         module_loader: JSModuleLoaderFunc,
-        opaque: *mut ::std::os::raw::c_void,
+        opaque: *mut ::core::ffi::c_void,
     );
 }
 extern "C" {
@@ -1906,10 +1906,10 @@ extern "C" {
 extern "C" {
     pub fn JS_FreeUnevaluatedModules(ctx: *mut JSContext);
 }
-pub type JSJobFunc = ::std::option::Option<
+pub type JSJobFunc = ::core::option::Option<
     unsafe extern "C" fn(
         ctx: *mut JSContext,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
     ) -> JSValue,
 >;
@@ -1917,25 +1917,25 @@ extern "C" {
     pub fn JS_EnqueueJob(
         ctx: *mut JSContext,
         job_func: JSJobFunc,
-        argc: ::std::os::raw::c_int,
+        argc: ::core::ffi::c_int,
         argv: *mut JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
-    pub fn JS_IsJobPending(rt: *mut JSRuntime) -> ::std::os::raw::c_int;
+    pub fn JS_IsJobPending(rt: *mut JSRuntime) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_ExecutePendingJob(
         rt: *mut JSRuntime,
         pctx: *mut *mut JSContext,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_WriteObject(
         ctx: *mut JSContext,
         psize: *mut size_t,
         obj: JSValue,
-        flags: ::std::os::raw::c_int,
+        flags: ::core::ffi::c_int,
     ) -> *mut u8;
 }
 extern "C" {
@@ -1943,7 +1943,7 @@ extern "C" {
         ctx: *mut JSContext,
         psize: *mut size_t,
         obj: JSValue,
-        flags: ::std::os::raw::c_int,
+        flags: ::core::ffi::c_int,
         psab_tab: *mut *mut *mut u8,
         psab_tab_len: *mut size_t,
     ) -> *mut u8;
@@ -1953,26 +1953,26 @@ extern "C" {
         ctx: *mut JSContext,
         buf: *const u8,
         buf_len: size_t,
-        flags: ::std::os::raw::c_int,
+        flags: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_EvalFunction(ctx: *mut JSContext, fun_obj: JSValue) -> JSValue;
 }
 extern "C" {
-    pub fn JS_ResolveModule(ctx: *mut JSContext, obj: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_ResolveModule(ctx: *mut JSContext, obj: JSValue) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_GetScriptOrModuleName(
         ctx: *mut JSContext,
-        n_stack_levels: ::std::os::raw::c_int,
+        n_stack_levels: ::core::ffi::c_int,
     ) -> JSAtom;
 }
 extern "C" {
     pub fn JS_RunModule(
         ctx: *mut JSContext,
-        basename: *const ::std::os::raw::c_char,
-        filename: *const ::std::os::raw::c_char,
+        basename: *const ::core::ffi::c_char,
+        filename: *const ::core::ffi::c_char,
     ) -> *mut JSModuleDef;
 }
 pub const JSCFunctionEnum_JS_CFUNC_generic: JSCFunctionEnum = 0;
@@ -1988,81 +1988,81 @@ pub const JSCFunctionEnum_JS_CFUNC_setter: JSCFunctionEnum = 9;
 pub const JSCFunctionEnum_JS_CFUNC_getter_magic: JSCFunctionEnum = 10;
 pub const JSCFunctionEnum_JS_CFUNC_setter_magic: JSCFunctionEnum = 11;
 pub const JSCFunctionEnum_JS_CFUNC_iterator_next: JSCFunctionEnum = 12;
-pub type JSCFunctionEnum = ::std::os::raw::c_int;
+pub type JSCFunctionEnum = ::core::ffi::c_int;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union JSCFunctionType {
     pub generic: JSCFunction,
-    pub generic_magic: ::std::option::Option<
+    pub generic_magic: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             this_val: JSValue,
-            argc: ::std::os::raw::c_int,
+            argc: ::core::ffi::c_int,
             argv: *mut JSValue,
-            magic: ::std::os::raw::c_int,
+            magic: ::core::ffi::c_int,
         ) -> JSValue,
     >,
     pub constructor: JSCFunction,
-    pub constructor_magic: ::std::option::Option<
+    pub constructor_magic: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             new_target: JSValue,
-            argc: ::std::os::raw::c_int,
+            argc: ::core::ffi::c_int,
             argv: *mut JSValue,
-            magic: ::std::os::raw::c_int,
+            magic: ::core::ffi::c_int,
         ) -> JSValue,
     >,
     pub constructor_or_func: JSCFunction,
-    pub f_f: ::std::option::Option<unsafe extern "C" fn(arg1: f64) -> f64>,
-    pub f_f_f: ::std::option::Option<unsafe extern "C" fn(arg1: f64, arg2: f64) -> f64>,
-    pub getter: ::std::option::Option<
+    pub f_f: ::core::option::Option<unsafe extern "C" fn(arg1: f64) -> f64>,
+    pub f_f_f: ::core::option::Option<unsafe extern "C" fn(arg1: f64, arg2: f64) -> f64>,
+    pub getter: ::core::option::Option<
         unsafe extern "C" fn(ctx: *mut JSContext, this_val: JSValue) -> JSValue,
     >,
-    pub setter: ::std::option::Option<
+    pub setter: ::core::option::Option<
         unsafe extern "C" fn(ctx: *mut JSContext, this_val: JSValue, val: JSValue) -> JSValue,
     >,
-    pub getter_magic: ::std::option::Option<
+    pub getter_magic: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             this_val: JSValue,
-            magic: ::std::os::raw::c_int,
+            magic: ::core::ffi::c_int,
         ) -> JSValue,
     >,
-    pub setter_magic: ::std::option::Option<
+    pub setter_magic: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             this_val: JSValue,
             val: JSValue,
-            magic: ::std::os::raw::c_int,
+            magic: ::core::ffi::c_int,
         ) -> JSValue,
     >,
-    pub iterator_next: ::std::option::Option<
+    pub iterator_next: ::core::option::Option<
         unsafe extern "C" fn(
             ctx: *mut JSContext,
             this_val: JSValue,
-            argc: ::std::os::raw::c_int,
+            argc: ::core::ffi::c_int,
             argv: *mut JSValue,
-            pdone: *mut ::std::os::raw::c_int,
-            magic: ::std::os::raw::c_int,
+            pdone: *mut ::core::ffi::c_int,
+            magic: ::core::ffi::c_int,
         ) -> JSValue,
     >,
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionType() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionType> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionType> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionType>(),
+        ::core::mem::size_of::<JSCFunctionType>(),
         8usize,
         concat!("Size of: ", stringify!(JSCFunctionType))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionType>(),
+        ::core::mem::align_of::<JSCFunctionType>(),
         8usize,
         concat!("Alignment of ", stringify!(JSCFunctionType))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).generic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).generic) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2072,7 +2072,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).generic_magic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).generic_magic) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2082,7 +2082,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).constructor) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).constructor) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2092,7 +2092,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).constructor_magic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).constructor_magic) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2102,7 +2102,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).constructor_or_func) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).constructor_or_func) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2112,7 +2112,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).f_f) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).f_f) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2122,7 +2122,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).f_f_f) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).f_f_f) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2132,7 +2132,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).getter) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).getter) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2142,7 +2142,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).setter) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).setter) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2152,7 +2152,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).getter_magic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).getter_magic) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2162,7 +2162,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).setter_magic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).setter_magic) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2172,7 +2172,7 @@ fn bindgen_test_layout_JSCFunctionType() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).iterator_next) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).iterator_next) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2186,19 +2186,19 @@ extern "C" {
     pub fn JS_NewCFunction2(
         ctx: *mut JSContext,
         func: JSCFunction,
-        name: *const ::std::os::raw::c_char,
-        length: ::std::os::raw::c_int,
+        name: *const ::core::ffi::c_char,
+        length: ::core::ffi::c_int,
         cproto: JSCFunctionEnum,
-        magic: ::std::os::raw::c_int,
+        magic: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_NewCFunctionData(
         ctx: *mut JSContext,
         func: JSCFunctionData,
-        length: ::std::os::raw::c_int,
-        magic: ::std::os::raw::c_int,
-        data_len: ::std::os::raw::c_int,
+        length: ::core::ffi::c_int,
+        magic: ::core::ffi::c_int,
+        data_len: ::core::ffi::c_int,
         data: *mut JSValue,
     ) -> JSValue;
 }
@@ -2208,7 +2208,7 @@ extern "C" {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct JSCFunctionListEntry {
-    pub name: *const ::std::os::raw::c_char,
+    pub name: *const ::core::ffi::c_char,
     pub prop_flags: u8,
     pub def_type: u8,
     pub magic: i16,
@@ -2221,7 +2221,7 @@ pub union JSCFunctionListEntry__bindgen_ty_1 {
     pub getset: JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2,
     pub alias: JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3,
     pub prop_list: JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4,
-    pub str_: *const ::std::os::raw::c_char,
+    pub str_: *const ::core::ffi::c_char,
     pub i32_: i32,
     pub i64_: i64,
     pub f64_: f64,
@@ -2235,11 +2235,11 @@ pub struct JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1 {
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1> =
-        ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1> =
+        ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1>(),
+        ::core::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1>(),
         16usize,
         concat!(
             "Size of: ",
@@ -2247,7 +2247,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1>(),
+        ::core::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1>(),
         8usize,
         concat!(
             "Alignment of ",
@@ -2255,7 +2255,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).length) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).length) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2265,7 +2265,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).cproto) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).cproto) as usize - ptr as usize },
         1usize,
         concat!(
             "Offset of field: ",
@@ -2275,7 +2275,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).cfunc) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).cfunc) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -2293,11 +2293,11 @@ pub struct JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2 {
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2> =
-        ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2> =
+        ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2>(),
+        ::core::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2>(),
         16usize,
         concat!(
             "Size of: ",
@@ -2305,7 +2305,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2() {
         )
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2>(),
+        ::core::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2>(),
         8usize,
         concat!(
             "Alignment of ",
@@ -2313,7 +2313,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).get) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).get) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2323,7 +2323,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).set) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).set) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -2336,16 +2336,16 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_2() {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3 {
-    pub name: *const ::std::os::raw::c_char,
-    pub base: ::std::os::raw::c_int,
+    pub name: *const ::core::ffi::c_char,
+    pub base: ::core::ffi::c_int,
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3> =
-        ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3> =
+        ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3>(),
+        ::core::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3>(),
         16usize,
         concat!(
             "Size of: ",
@@ -2353,7 +2353,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3() {
         )
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3>(),
+        ::core::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3>(),
         8usize,
         concat!(
             "Alignment of ",
@@ -2361,7 +2361,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).name) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).name) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2371,7 +2371,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).base) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).base) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -2385,15 +2385,15 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_3() {
 #[derive(Debug, Copy, Clone)]
 pub struct JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4 {
     pub tab: *const JSCFunctionListEntry,
-    pub len: ::std::os::raw::c_int,
+    pub len: ::core::ffi::c_int,
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4> =
-        ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4> =
+        ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4>(),
+        ::core::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4>(),
         16usize,
         concat!(
             "Size of: ",
@@ -2401,7 +2401,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4() {
         )
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4>(),
+        ::core::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4>(),
         8usize,
         concat!(
             "Alignment of ",
@@ -2409,7 +2409,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).tab) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).tab) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2419,7 +2419,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).len) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).len) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -2431,16 +2431,16 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1__bindgen_ty_4() {
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1> =
-        ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionListEntry__bindgen_ty_1> =
+        ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1>(),
+        ::core::mem::size_of::<JSCFunctionListEntry__bindgen_ty_1>(),
         16usize,
         concat!("Size of: ", stringify!(JSCFunctionListEntry__bindgen_ty_1))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1>(),
+        ::core::mem::align_of::<JSCFunctionListEntry__bindgen_ty_1>(),
         8usize,
         concat!(
             "Alignment of ",
@@ -2448,7 +2448,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).func) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).func) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2458,7 +2458,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).getset) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).getset) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2468,7 +2468,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).alias) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).alias) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2478,7 +2478,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).prop_list) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).prop_list) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2488,7 +2488,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).str_) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).str_) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2498,7 +2498,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).i32_) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).i32_) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2508,7 +2508,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).i64_) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).i64_) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2518,7 +2518,7 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).f64_) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).f64_) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2530,20 +2530,20 @@ fn bindgen_test_layout_JSCFunctionListEntry__bindgen_ty_1() {
 }
 #[test]
 fn bindgen_test_layout_JSCFunctionListEntry() {
-    const UNINIT: ::std::mem::MaybeUninit<JSCFunctionListEntry> = ::std::mem::MaybeUninit::uninit();
+    const UNINIT: ::core::mem::MaybeUninit<JSCFunctionListEntry> = ::core::mem::MaybeUninit::uninit();
     let ptr = UNINIT.as_ptr();
     assert_eq!(
-        ::std::mem::size_of::<JSCFunctionListEntry>(),
+        ::core::mem::size_of::<JSCFunctionListEntry>(),
         32usize,
         concat!("Size of: ", stringify!(JSCFunctionListEntry))
     );
     assert_eq!(
-        ::std::mem::align_of::<JSCFunctionListEntry>(),
+        ::core::mem::align_of::<JSCFunctionListEntry>(),
         8usize,
         concat!("Alignment of ", stringify!(JSCFunctionListEntry))
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).name) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).name) as usize - ptr as usize },
         0usize,
         concat!(
             "Offset of field: ",
@@ -2553,7 +2553,7 @@ fn bindgen_test_layout_JSCFunctionListEntry() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).prop_flags) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).prop_flags) as usize - ptr as usize },
         8usize,
         concat!(
             "Offset of field: ",
@@ -2563,7 +2563,7 @@ fn bindgen_test_layout_JSCFunctionListEntry() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).def_type) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).def_type) as usize - ptr as usize },
         9usize,
         concat!(
             "Offset of field: ",
@@ -2573,7 +2573,7 @@ fn bindgen_test_layout_JSCFunctionListEntry() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).magic) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).magic) as usize - ptr as usize },
         10usize,
         concat!(
             "Offset of field: ",
@@ -2583,7 +2583,7 @@ fn bindgen_test_layout_JSCFunctionListEntry() {
         )
     );
     assert_eq!(
-        unsafe { ::std::ptr::addr_of!((*ptr).u) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr).u) as usize - ptr as usize },
         16usize,
         concat!(
             "Offset of field: ",
@@ -2598,16 +2598,16 @@ extern "C" {
         ctx: *mut JSContext,
         obj: JSValue,
         tab: *const JSCFunctionListEntry,
-        len: ::std::os::raw::c_int,
+        len: ::core::ffi::c_int,
     );
 }
-pub type JSModuleInitFunc = ::std::option::Option<
-    unsafe extern "C" fn(ctx: *mut JSContext, m: *mut JSModuleDef) -> ::std::os::raw::c_int,
+pub type JSModuleInitFunc = ::core::option::Option<
+    unsafe extern "C" fn(ctx: *mut JSContext, m: *mut JSModuleDef) -> ::core::ffi::c_int,
 >;
 extern "C" {
     pub fn JS_NewCModule(
         ctx: *mut JSContext,
-        name_str: *const ::std::os::raw::c_char,
+        name_str: *const ::core::ffi::c_char,
         func: JSModuleInitFunc,
     ) -> *mut JSModuleDef;
 }
@@ -2615,61 +2615,61 @@ extern "C" {
     pub fn JS_AddModuleExport(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
-        name_str: *const ::std::os::raw::c_char,
-    ) -> ::std::os::raw::c_int;
+        name_str: *const ::core::ffi::c_char,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_AddModuleExportList(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
         tab: *const JSCFunctionListEntry,
-        len: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        len: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetModuleExport(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
-        export_name: *const ::std::os::raw::c_char,
+        export_name: *const ::core::ffi::c_char,
         val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_SetModuleExportList(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
         tab: *const JSCFunctionListEntry,
-        len: ::std::os::raw::c_int,
-    ) -> ::std::os::raw::c_int;
+        len: ::core::ffi::c_int,
+    ) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_DynamicImportSync(
         ctx: *mut JSContext,
-        specifier: *const ::std::os::raw::c_char,
+        specifier: *const ::core::ffi::c_char,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_GetModuleExport(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
-        export_name: *const ::std::os::raw::c_char,
+        export_name: *const ::core::ffi::c_char,
     ) -> JSValue;
 }
 extern "C" {
-    pub fn JS_GetModuleExportEntriesCount(m: *mut JSModuleDef) -> ::std::os::raw::c_int;
+    pub fn JS_GetModuleExportEntriesCount(m: *mut JSModuleDef) -> ::core::ffi::c_int;
 }
 extern "C" {
     pub fn JS_GetModuleExportEntry(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
-        idx: ::std::os::raw::c_int,
+        idx: ::core::ffi::c_int,
     ) -> JSValue;
 }
 extern "C" {
     pub fn JS_GetModuleExportEntryName(
         ctx: *mut JSContext,
         m: *mut JSModuleDef,
-        idx: ::std::os::raw::c_int,
+        idx: ::core::ffi::c_int,
     ) -> JSAtom;
 }
 pub const __JS_ATOM_NULL: _bindgen_ty_2 = 0;
@@ -2896,4 +2896,4 @@ pub const JS_ATOM_Symbol_unscopables: _bindgen_ty_2 = 220;
 pub const JS_ATOM_Symbol_asyncIterator: _bindgen_ty_2 = 221;
 pub const JS_ATOM_Symbol_operatorSet: _bindgen_ty_2 = 222;
 pub const JS_ATOM_END: _bindgen_ty_2 = 223;
-pub type _bindgen_ty_2 = ::std::os::raw::c_int;
+pub type _bindgen_ty_2 = ::core::ffi::c_int;
